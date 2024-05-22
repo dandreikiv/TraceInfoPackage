@@ -24,6 +24,6 @@ extension TraceInfo {
     }
 
     public mutating func incrementSucceeded() {
-        sent += 1
+        succeeded += 1
     }
 }
