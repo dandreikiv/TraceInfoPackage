@@ -11,7 +11,7 @@ final class TraceInfoTests: XCTestCase {
 
     func test_initialValues_forTraceInfo() async {
         // When
-        let traceInfo = await sut.traceInfoAtQueue(index: 0)
+        let traceInfo = await sut.traceInfo(atQueue: 0)
 
         // Then
         XCTAssertEqual(traceInfo?.sent, 0)
@@ -23,7 +23,7 @@ final class TraceInfoTests: XCTestCase {
         await sut.sendRequest(atQueue: 0)
 
         // Then
-        let traceInfo = await sut.traceInfoAtQueue(index: 0)
+        let traceInfo = await sut.traceInfo(atQueue: 0)
         XCTAssertNotNil(traceInfo)
         XCTAssertEqual(traceInfo?.sent, 1)
     }
@@ -33,7 +33,7 @@ final class TraceInfoTests: XCTestCase {
         await sut.receivedSuccessResponse(atQueue: 0)
 
         // Then
-        let traceInfo = await sut.traceInfoAtQueue(index: 0)
+        let traceInfo = await sut.traceInfo(atQueue: 0)
         XCTAssertNotNil(traceInfo)
         XCTAssertEqual(traceInfo?.succeeded, 1)
     }

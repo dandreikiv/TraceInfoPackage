@@ -3,7 +3,7 @@ import Foundation
 public protocol TraceInfoControllerLogic {
     func sendRequest(atQueue index: UInt) async
     func receivedSuccessResponse(atQueue index: UInt) async
-    func traceInfoAtQueue(index: UInt) async -> TraceInfo?
+    func traceInfo(atQueue index: UInt) async -> TraceInfo?
 }
 
 public actor TraceInfoController {
@@ -25,7 +25,7 @@ extension TraceInfoController: TraceInfoControllerLogic {
         traceInfoQueues[index]?.incrementSucceeded()
     }
 
-    public func traceInfoAtQueue(index: UInt) async -> TraceInfo? {
+    public func traceInfo(atQueue index: UInt) async -> TraceInfo? {
         traceInfoQueues[index]
     }
 }
