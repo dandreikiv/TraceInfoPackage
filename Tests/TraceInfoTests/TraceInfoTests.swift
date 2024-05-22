@@ -2,11 +2,39 @@ import XCTest
 @testable import TraceInfo
 
 final class TraceInfoTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+    private var sut: TraceInfoController!
 
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+    override func setUp() {
+        super.setUp()
+        sut = TraceInfoController()
+    }
+
+    func test_initialValues_forTraceInfo() async {
+        // When
+        let traceInfo = await sut.traceInfoAtQueue(index: 0)
+
+        // Then
+        XCTAssertEqual(traceInfo?.sent, 0)
+        XCTAssertEqual(traceInfo?.succeeded, 0)
+    }
+
+    func test_controller_whenSendRequest_shouldIncrement() async {
+        // When
+        await sut.sendRequest(atQueue: 0)
+
+        // Then
+        let traceInfo = await sut.traceInfoAtQueue(index: 0)
+        XCTAssertNotNil(traceInfo)
+        XCTAssertEqual(traceInfo?.sent, 1)
+    }
+
+    func test_controller_whenReceivedSuccessResponse_shouldIncrement() async {
+        // When
+        await sut.receivedSuccessResponse(atQueue: 0)
+
+        // Then
+        let traceInfo = await sut.traceInfoAtQueue(index: 0)
+        XCTAssertNotNil(traceInfo)
+        XCTAssertEqual(traceInfo?.succeeded, 1)
     }
 }
