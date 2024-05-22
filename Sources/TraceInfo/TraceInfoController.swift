@@ -1,8 +1,17 @@
 import Foundation
 
 public protocol TraceInfoControllerLogic {
+    /// Increment the `sent` value of a `TraceInfo` object at queue with given index
+    /// - Parameter index: index of a queue, where the `TraceInfo` stored
     func sendRequest(atQueue index: UInt) async
+    
+    /// Increment the `succeeded` value of a `TraceInfo` object at queue with given index
+    /// - Parameter index: index of a queue, where the `TraceInfo` stored
     func receivedSuccessResponse(atQueue index: UInt) async
+    
+    /// Returns a `TraceInfo` object from queue with given index
+    /// - Parameter index: index of the queue
+    /// - Returns: TraceInfo object, if a queue with the given index exists, otherwise - nil
     func traceInfo(atQueue index: UInt) async -> TraceInfo?
 }
 
